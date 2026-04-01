@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦎 El Mundo de los Ajolotes de Mateo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <div class="bubbles">
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">🦎 Bienvenido al acuario de</div>
+            <h1 class="hero-title">
+                <span class="name-highlight">Mateo</span>
+            </h1>
+            <p class="hero-subtitle">Descubre el fascinante mundo de los ajolotes</p>
+            <a href="#categorias" class="hero-btn">¡Explorar! 🔍</a>
+        </div>
+        <div class="hero-axolotl">
+            <svg viewBox="0 0 200 160" class="axolotl-svg">
+                <!-- Body -->
+                <ellipse cx="100" cy="95" rx="50" ry="35" fill="#F8A4C8"/>
+                <!-- Head -->
+                <ellipse cx="100" cy="60" rx="40" ry="32" fill="#F8A4C8"/>
+                <!-- Eyes -->
+                <ellipse cx="85" cy="55" rx="8" ry="9" fill="white"/>
+                <ellipse cx="115" cy="55" rx="8" ry="9" fill="white"/>
+                <circle cx="87" cy="56" r="5" fill="#1a1a2e"/>
+                <circle cx="117" cy="56" r="5" fill="#1a1a2e"/>
+                <circle cx="89" cy="54" r="2" fill="white"/>
+                <circle cx="119" cy="54" r="2" fill="white"/>
+                <!-- Smile -->
+                <path d="M 88 68 Q 100 78 112 68" stroke="#c0607e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <!-- Cheeks -->
+                <ellipse cx="78" cy="65" rx="6" ry="4" fill="#f4849e" opacity="0.6"/>
+                <ellipse cx="122" cy="65" rx="6" ry="4" fill="#f4849e" opacity="0.6"/>
+                <!-- Gills left -->
+                <line x1="62" y1="35" x2="45" y2="15" stroke="#E87BAF" stroke-width="4" stroke-linecap="round"/>
+                <line x1="58" y1="40" x2="35" y2="25" stroke="#E87BAF" stroke-width="4" stroke-linecap="round"/>
+                <line x1="56" y1="48" x2="30" y2="40" stroke="#E87BAF" stroke-width="4" stroke-linecap="round"/>
+                <!-- Gills right -->
+                <line x1="138" y1="35" x2="155" y2="15" stroke="#E87BAF" stroke-width="4" stroke-linecap="round"/>
+                <line x1="142" y1="40" x2="165" y2="25" stroke="#E87BAF" stroke-width="4" stroke-linecap="round"/>
+                <line x1="144" y1="48" x2="170" y2="40" stroke="#E87BAF" stroke-width="4" stroke-linecap="round"/>
+                <!-- Gill dots -->
+                <circle cx="45" cy="15" r="3" fill="#ff6b9d"/>
+                <circle cx="35" cy="25" r="3" fill="#ff6b9d"/>
+                <circle cx="30" cy="40" r="3" fill="#ff6b9d"/>
+                <circle cx="155" cy="15" r="3" fill="#ff6b9d"/>
+                <circle cx="165" cy="25" r="3" fill="#ff6b9d"/>
+                <circle cx="170" cy="40" r="3" fill="#ff6b9d"/>
+                <!-- Front legs -->
+                <path d="M 65 100 Q 45 110 40 120" stroke="#F8A4C8" stroke-width="8" fill="none" stroke-linecap="round"/>
+                <path d="M 135 100 Q 155 110 160 120" stroke="#F8A4C8" stroke-width="8" fill="none" stroke-linecap="round"/>
+                <!-- Fingers -->
+                <circle cx="38" cy="122" r="3" fill="#F8A4C8"/>
+                <circle cx="42" cy="124" r="3" fill="#F8A4C8"/>
+                <circle cx="36" cy="118" r="3" fill="#F8A4C8"/>
+                <circle cx="162" cy="122" r="3" fill="#F8A4C8"/>
+                <circle cx="158" cy="124" r="3" fill="#F8A4C8"/>
+                <circle cx="164" cy="118" r="3" fill="#F8A4C8"/>
+                <!-- Tail -->
+                <path d="M 145 95 Q 170 85 185 100 Q 175 95 165 105" fill="#F8A4C8" opacity="0.8"/>
+            </svg>
+        </div>
+    </header>
+
+    <!-- NAV -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-inner">
+            <span class="nav-logo">🦎 Ajolotes de Mateo</span>
+            <div class="nav-links">
+                <a href="#categorias">Tipos</a>
+                <a href="#caracteristicas">Datos</a>
+                <a href="#ecosistemas">Ecosistemas</a>
+                <a href="#mapa">Mapa</a>
+                <a href="#curiosidades">Curiosidades</a>
+                <a href="#dibujo">Dibujo</a>
+                <a href="#junior">Junior</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- BIOGRAFÍA DEL AUTOR -->
+    <section class="bio-section" id="autor">
+        <div class="container">
+            <h2 class="section-title">Sobre el Autor 👦</h2>
+            <div class="bio-card">
+                <div class="bio-avatar">🦎</div>
+                <h3 class="bio-name">Mateo</h3>
+                <div class="bio-badges">
+                    <span class="bio-badge">📍 Madrid</span>
+                    <span class="bio-badge">🎂 10 años</span>
+                    <span class="bio-badge">🩷 Leucístico</span>
+                </div>
+                <div class="bio-text">
+                    <p>A Mateo <strong>le encantan los ajolotes desde que tenía 8 años</strong>. Nació en Madrid y a los 10 años (¡ahora!) hizo una presentación en Google con los <strong>33 tipos de ajolotes</strong> que existen. ¡Menudo experto!</p>
+                    <p>Antes de descubrir los ajolotes, su animal favorito era el <strong>panda</strong> 🐼, pero todo cambió cuando conoció a estas criaturas sonrientes. Su tipo favorito de ajolote es el <strong>leucístico</strong> 🩷, el adorable ajolote rosado con ojos oscuros.</p>
+                    <p>De mayor le encantaría tener un ajolote, pero sabe que no podría por el clima y porque están <strong>en peligro de extinción</strong> 🔴. Así que se conforma con verlos nadar y aprender todo sobre ellos.</p>
+                    <p>Al final, junto con su padre, creó esta fascinante web <strong>para que sepas casi tanto como él</strong>. 🚀</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTRO -->
+    <section class="intro-section">
+        <div class="container">
+            <h2 class="section-title">¿Qué es un Ajolote? 🤔</h2>
+            <div class="intro-card">
+                <div class="intro-icon">🧬</div>
+                <p>El <strong>ajolote</strong> (<em>Ambystoma mexicanum</em>) es una criatura mágica que vive en el agua. 
+                A diferencia de otros anfibios, el ajolote <strong>nunca crece del todo</strong>: se queda en su forma 
+                de larva para siempre, conservando sus increíbles branquias externas que parecen una corona de plumas. 
+                ¡Es como si fuera un Pokémon que decide no evolucionar! 🎮</p>
+                <p>Son originarios de <strong>México</strong> y están considerados uno de los animales más fascinantes 
+                del planeta. ¡Y tienen un superpoder increíble: pueden <strong>regenerar</strong> partes de su cuerpo!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CATEGORÍAS / TIPOS -->
+    <section class="categories-section" id="categorias">
+        <div class="container">
+            <h2 class="section-title">Tipos de Ajolotes 🎨</h2>
+            <p class="section-desc">¡Pulsa sobre cada ajolote para descubrir más, Mateo!</p>
+            
+            <div class="category-buttons">
+                <button class="cat-btn active" data-type="silvestre" style="--btn-color: #4a7c59">
+                    <span class="cat-emoji">🌿</span>
+                    <span class="cat-name">Silvestre</span>
+                </button>
+                <button class="cat-btn" data-type="leucistico" style="--btn-color: #f8a4c8">
+                    <span class="cat-emoji">🩷</span>
+                    <span class="cat-name">Leucístico</span>
+                </button>
+                <button class="cat-btn" data-type="albino" style="--btn-color: #ffd700">
+                    <span class="cat-emoji">⭐</span>
+                    <span class="cat-name">Albino</span>
+                </button>
+                <button class="cat-btn" data-type="melanico" style="--btn-color: #2d2d44">
+                    <span class="cat-emoji">🖤</span>
+                    <span class="cat-name">Melánico</span>
+                </button>
+                <button class="cat-btn" data-type="golden" style="--btn-color: #e8a317">
+                    <span class="cat-emoji">✨</span>
+                    <span class="cat-name">Golden</span>
+                </button>
+                <button class="cat-btn" data-type="copper" style="--btn-color: #b87333">
+                    <span class="cat-emoji">🟤</span>
+                    <span class="cat-name">Copper</span>
+                </button>
+                <button class="cat-btn" data-type="gfp" style="--btn-color: #39ff14">
+                    <span class="cat-emoji">💚</span>
+                    <span class="cat-name">GFP</span>
+                </button>
+                <button class="cat-btn" data-type="mosaico" style="--btn-color: #8b5cf6">
+                    <span class="cat-emoji">🎭</span>
+                    <span class="cat-name">Mosaico</span>
+                </button>
+                <button class="cat-btn" data-type="piebald" style="--btn-color: #607d8b">
+                    <span class="cat-emoji">🐄</span>
+                    <span class="cat-name">Piebald</span>
+                </button>
+                <button class="cat-btn" data-type="lavanda" style="--btn-color: #9575cd">
+                    <span class="cat-emoji">💜</span>
+                    <span class="cat-name">Lavanda</span>
+                </button>
+                <button class="cat-btn" data-type="firefly" style="--btn-color: #ff5722">
+                    <span class="cat-emoji">🔥</span>
+                    <span class="cat-name">Firefly</span>
+                </button>
+                <button class="cat-btn" data-type="enigma" style="--btn-color: #1a237e">
+                    <span class="cat-emoji">🌌</span>
+                    <span class="cat-name">Enigma</span>
+                </button>
+            </div>
+
+            <div class="category-detail" id="categoryDetail">
+                <!-- Filled by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CARACTERÍSTICAS -->
+    <section class="features-section" id="caracteristicas">
+        <div class="container">
+            <h2 class="section-title">Datos Increíbles 📊</h2>
+            <div class="stats-grid">
+                <div class="stat-card" style="--accent: #ff6b9d">
+                    <div class="stat-icon">📏</div>
+                    <div class="stat-value">15-45 cm</div>
+                    <div class="stat-label">Tamaño adulto</div>
+                    <p class="stat-desc">Pueden llegar a medir hasta 45 cm de largo, aunque lo normal es entre 15 y 30 cm.</p>
+                </div>
+                <div class="stat-card" style="--accent: #4ecdc4">
+                    <div class="stat-icon">⏳</div>
+                    <div class="stat-value">10-15 años</div>
+                    <div class="stat-label">Esperanza de vida</div>
+                    <p class="stat-desc">En cautividad pueden vivir hasta 15 años si se les cuida bien.</p>
+                </div>
+                <div class="stat-card" style="--accent: #ffd93d">
+                    <div class="stat-icon">🌡️</div>
+                    <div class="stat-value">14-20°C</div>
+                    <div class="stat-label">Temperatura ideal</div>
+                    <p class="stat-desc">Prefieren el agua fresquita. ¡El calor excesivo les estresa!</p>
+                </div>
+                <div class="stat-card" style="--accent: #a78bfa">
+                    <div class="stat-icon">🦴</div>
+                    <div class="stat-value">∞</div>
+                    <div class="stat-label">Regeneración</div>
+                    <p class="stat-desc">Pueden regenerar extremidades, corazón, cerebro y médula espinal. ¡Son superhéroes!</p>
+                </div>
+                <div class="stat-card" style="--accent: #f97316">
+                    <div class="stat-icon">🥚</div>
+                    <div class="stat-value">100-1000</div>
+                    <div class="stat-label">Huevos por puesta</div>
+                    <p class="stat-desc">Una hembra puede poner entre 100 y 1000 huevos de una sola vez.</p>
+                </div>
+                <div class="stat-card" style="--accent: #06b6d4">
+                    <div class="stat-icon">🫁</div>
+                    <div class="stat-value">3 formas</div>
+                    <div class="stat-label">De respirar</div>
+                    <p class="stat-desc">Respiran por branquias, pulmones y a través de la piel. ¡Triple combo!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ECOSISTEMAS -->
+    <section class="ecosystem-section" id="ecosistemas">
+        <div class="container">
+            <h2 class="section-title">Su Ecosistema Natural 🌍</h2>
+            <div class="eco-grid">
+                <div class="eco-card">
+                    <div class="eco-header" style="background: linear-gradient(135deg, #1a5276, #2980b9)">
+                        <span class="eco-icon">💧</span>
+                        <h3>Lago de Xochimilco</h3>
+                    </div>
+                    <div class="eco-body">
+                        <p>El hogar original del ajolote mexicano es el <strong>sistema de canales de Xochimilco</strong>, 
+                        en la Ciudad de México. Estos canales son los restos del antiguo lago que los aztecas usaban para 
+                        construir sus famosas <em>chinampas</em> (islas flotantes para agricultura).</p>
+                        <div class="eco-tag">Agua dulce • Canales • Chinampas</div>
+                    </div>
+                </div>
+                <div class="eco-card">
+                    <div class="eco-header" style="background: linear-gradient(135deg, #1e8449, #27ae60)">
+                        <span class="eco-icon">🌿</span>
+                        <h3>Vegetación Acuática</h3>
+                    </div>
+                    <div class="eco-body">
+                        <p>Los ajolotes adoran esconderse entre las <strong>plantas acuáticas</strong>. 
+                        Las hembras depositan sus huevos en las plantas y estas les proporcionan refugio 
+                        contra depredadores. Las plantas también ayudan a mantener el agua limpia y oxigenada.</p>
+                        <div class="eco-tag">Lirios • Elodea • Juncos</div>
+                    </div>
+                </div>
+                <div class="eco-card">
+                    <div class="eco-header" style="background: linear-gradient(135deg, #6c3483, #8e44ad)">
+                        <span class="eco-icon">🌙</span>
+                        <h3>Vida Nocturna</h3>
+                    </div>
+                    <div class="eco-body">
+                        <p>Los ajolotes son <strong>animales nocturnos</strong>. Durante el día se esconden en el 
+                        fondo del lago entre las rocas y plantas, y por la noche salen a cazar. 
+                        Se alimentan de pequeños peces, insectos, gusanos y crustáceos.</p>
+                        <div class="eco-tag">Nocturnos • Carnívoros • Cazadores</div>
+                    </div>
+                </div>
+                <div class="eco-card">
+                    <div class="eco-header" style="background: linear-gradient(135deg, #c0392b, #e74c3c)">
+                        <span class="eco-icon">⚠️</span>
+                        <h3>En Peligro Crítico</h3>
+                    </div>
+                    <div class="eco-body">
+                        <p>Tristemente, el ajolote está en <strong>peligro crítico de extinción</strong>. 
+                        La contaminación del agua, la urbanización de la Ciudad de México y las especies 
+                        invasoras (como la tilapia y la carpa) han destruido gran parte de su hábitat natural.</p>
+                        <div class="eco-tag">UICN: Peligro Crítico 🔴</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAPA -->
+    <section class="map-section" id="mapa">
+        <div class="container">
+            <h2 class="section-title">¿Dónde Viven? 🗺️</h2>
+            <p class="section-desc">Explora el mapa para ver dónde se encuentran los ajolotes en el mundo</p>
+            <div class="map-wrapper">
+                <div id="map"></div>
+            </div>
+            <div class="map-legend">
+                <div class="legend-item"><span class="legend-dot" style="background:#ff4757"></span> Hábitat natural (silvestre)</div>
+                <div class="legend-item"><span class="legend-dot" style="background:#2ed573"></span> Centros de conservación</div>
+                <div class="legend-item"><span class="legend-dot" style="background:#1e90ff"></span> Laboratorios de investigación</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VE AJOLOTES EN VIVO -->
+    <section class="streetview-section" id="streetview">
+        <div class="container">
+            <h2 class="section-title">Ve Ajolotes en Vivo 🎥</h2>
+            <p class="section-desc">¡Entra en sus hábitats, acuarios y laboratorios para ver ajolotes de verdad!</p>
+            <div class="sv-categories">
+                <button class="sv-cat-btn sv-cat-active" data-svcat="habitat" onclick="filterStreetView('habitat')">
+                    <span class="sv-cat-icon">🏞️</span> Hábitat Natural
+                </button>
+                <button class="sv-cat-btn" data-svcat="conservacion" onclick="filterStreetView('conservacion')">
+                    <span class="sv-cat-icon">🐾</span> Acuarios y Conservación
+                </button>
+                <button class="sv-cat-btn" data-svcat="laboratorio" onclick="filterStreetView('laboratorio')">
+                    <span class="sv-cat-icon">🔬</span> Laboratorios
+                </button>
+            </div>
+            <div class="sv-grid" id="svGrid">
+                <!-- HÁBITAT NATURAL -->
+                <div class="sv-card" data-svcat="habitat">
+                    <div class="sv-card-header" style="background: linear-gradient(135deg, #ff4757, #ff6b81)">
+                        <span class="sv-card-badge">🏞️ Hábitat</span>
+                        <h3>Ajolotes Salvajes en Xochimilco</h3>
+                        <p>Ciudad de México, México</p>
+                    </div>
+                    <div class="sv-card-body">
+                        <p>Buceando con ajolotes en los canales de Xochimilco. ¡Mira cómo nadan en su hábitat natural, entre las plantas acuáticas!</p>
+                        <button class="sv-explore-btn" onclick="openStreetView(this, 'xochimilco')">🎬 ¡Ver Ajolotes!</button>
+                    </div>
+                    <div class="sv-iframe-container" id="sv-xochimilco">
+                        <iframe loading="lazy" allowfullscreen
+                            src="https://www.youtube.com/embed/1hZsbsmsIyQ"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                        </iframe>
+                        <button class="sv-close-btn" onclick="closeStreetView('xochimilco')">✕ Cerrar</button>
+                    </div>
+                </div>
+
+                <div class="sv-card" data-svcat="habitat">
+                    <div class="sv-card-header" style="background: linear-gradient(135deg, #ff4757, #ff6b81)">
+                        <span class="sv-card-badge">🏞️ Hábitat</span>
+                        <h3>Salvando a los Ajolotes de México</h3>
+                        <p>Lago de Xochimilco</p>
+                    </div>
+                    <div class="sv-card-body">
+                        <p>Documental sobre los esfuerzos para salvar a los ajolotes en los canales de Xochimilco. ¡Ajolotes silvestres nadando bajo el agua!</p>
+                        <button class="sv-explore-btn" onclick="openStreetView(this, 'salvando')">🎬 ¡Ver Ajolotes!</button>
+                    </div>
+                    <div class="sv-iframe-container" id="sv-salvando">
+                        <iframe loading="lazy" allowfullscreen
+                            src="https://www.youtube.com/embed/z_lOASkYvjM"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                        </iframe>
+                        <button class="sv-close-btn" onclick="closeStreetView('salvando')">✕ Cerrar</button>
+                    </div>
+                </div>
+
+                <div class="sv-card" data-svcat="habitat">
+                    <div class="sv-card-header" style="background: linear-gradient(135deg, #ff4757, #ff6b81)">
+                        <span class="sv-card-badge">🏞️ Hábitat</span>
+                        <h3>Ajolotes Avistados en el Lago</h3>
+                        <p>Xochimilco, México</p>
+                    </div>
+                    <div class="sv-card-body">
+                        <p>¡Buenas noticias! Se han encontrado ajolotes en el lago, calmando los temores de extinción. ¡Míralos nadar!</p>
+                        <button class="sv-explore-btn" onclick="openStreetView(this, 'avistados')">🎬 ¡Ver Ajolotes!</button>
+                    </div>
+                    <div class="sv-iframe-container" id="sv-avistados">
+                        <iframe loading="lazy" allowfullscreen
+                            src="https://www.youtube.com/embed/IFnX1-PvG4w"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                        </iframe>
+                        <button class="sv-close-btn" onclick="closeStreetView('avistados')">✕ Cerrar</button>
+                    </div>
+                </div>
+
+                <!-- ACUARIOS Y CONSERVACIÓN -->
+                <div class="sv-card" data-svcat="conservacion">
+                    <div class="sv-card-header" style="background: linear-gradient(135deg, #2ed573, #7bed9f)">
+                        <span class="sv-card-badge">🐾 Acuario</span>
+                        <h3>Ajolote Nadando en tu Mano</h3>
+                        <p>Acuario</p>
+                    </div>
+                    <div class="sv-card-body">
+                        <p>Un ajolote simpático nadando y posándose en la mano de su cuidador. ¡Mira lo adorable y amigable que es!</p>
+                        <button class="sv-explore-btn" onclick="openStreetView(this, 'mano')">🎬 ¡Ver Ajolotes!</button>
+                    </div>
+                    <div class="sv-iframe-container" id="sv-mano">
+                        <iframe loading="lazy" allowfullscreen
+                            src="https://www.youtube.com/embed/8MRD38BYmmk"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                        </iframe>
+                        <button class="sv-close-btn" onclick="closeStreetView('mano')">✕ Cerrar</button>
+                    </div>
+                </div>
+
+                <div class="sv-card" data-svcat="conservacion">
+                    <div class="sv-card-header" style="background: linear-gradient(135deg, #2ed573, #7bed9f)">
+                        <span class="sv-card-badge">🐾 Acuario</span>
+                        <h3>Ajolote en su Acuario</h3>
+                        <p>Acuario doméstico</p>
+                    </div>
+                    <div class="sv-card-body">
+                        <p>Mira un ajolote mexicano nadando tranquilamente en su acuario. ¡Observa sus branquias moverse y su cara sonriente!</p>
+                        <button class="sv-explore-btn" onclick="openStreetView(this, 'acuario')">🎬 ¡Ver Ajolotes!</button>
+                    </div>
+                    <div class="sv-iframe-container" id="sv-acuario">
+                        <iframe loading="lazy" allowfullscreen
+                            src="https://www.youtube.com/embed/BDThQ1Lws_o"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                        </iframe>
+                        <button class="sv-close-btn" onclick="closeStreetView('acuario')">✕ Cerrar</button>
+                    </div>
+                </div>
+
+                <div class="sv-card" data-svcat="conservacion">
+                    <div class="sv-card-header" style="background: linear-gradient(135deg, #2ed573, #7bed9f)">
+                        <span class="sv-card-badge">🐾 Acuario</span>
+                        <h3>Montando un Acuario para Ajolotes</h3>
+                        <p>Cuidados y acuario</p>
+                    </div>
+                    <div class="sv-card-body">
+                        <p>Descubre cómo montar el acuario perfecto para un ajolote. ¡Mira cómo explora su nuevo hogar!</p>
+                        <button class="sv-explore-btn" onclick="openStreetView(this, 'montaje')">🎬 ¡Ver Ajolotes!</button>
+                    </div>
+                    <div class="sv-iframe-container" id="sv-montaje">
+                        <iframe loading="lazy" allowfullscreen
+                            src="https://www.youtube.com/embed/e4lKR6bpQBo"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                        </iframe>
+                        <button class="sv-close-btn" onclick="closeStreetView('montaje')">✕ Cerrar</button>
+                    </div>
+                </div>
+
+                <!-- LABORATORIOS -->
+                <div class="sv-card" data-svcat="laboratorio">
+                    <div class="sv-card-header" style="background: linear-gradient(135deg, #1e90ff, #74b9ff)">
+                        <span class="sv-card-badge">🔬 Laboratorio</span>
+                        <h3>Ajolotes y Regeneración</h3>
+                        <p>Marine Biological Laboratory, EEUU</p>
+                    </div>
+                    <div class="sv-card-body">
+                        <p>Dentro de un laboratorio real con ajolotes. ¡Mira cómo los científicos estudian su increíble poder de regeneración!</p>
+                        <button class="sv-explore-btn" onclick="openStreetView(this, 'mbl')">🎬 ¡Ver Ajolotes!</button>
+                    </div>
+                    <div class="sv-iframe-container" id="sv-mbl">
+                        <iframe loading="lazy" allowfullscreen
+                            src="https://www.youtube.com/embed/7ne4VKSqdXs"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                        </iframe>
+                        <button class="sv-close-btn" onclick="closeStreetView('mbl')">✕ Cerrar</button>
+                    </div>
+                </div>
+
+                <div class="sv-card" data-svcat="laboratorio">
+                    <div class="sv-card-header" style="background: linear-gradient(135deg, #1e90ff, #74b9ff)">
+                        <span class="sv-card-badge">🔬 Laboratorio</span>
+                        <h3>Harvard: Regeneración de Extremidades</h3>
+                        <p>Universidad de Harvard, EEUU</p>
+                    </div>
+                    <div class="sv-card-body">
+                        <p>La investigadora Jessica Whited de Harvard explica cómo los ajolotes regeneran sus patas. ¡Ciencia increíble con ajolotes reales!</p>
+                        <button class="sv-explore-btn" onclick="openStreetView(this, 'harvard')">🎬 ¡Ver Ajolotes!</button>
+                    </div>
+                    <div class="sv-iframe-container" id="sv-harvard">
+                        <iframe loading="lazy" allowfullscreen
+                            src="https://www.youtube.com/embed/7cLaU_agj6k"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                        </iframe>
+                        <button class="sv-close-btn" onclick="closeStreetView('harvard')">✕ Cerrar</button>
+                    </div>
+                </div>
+
+                <div class="sv-card" data-svcat="laboratorio">
+                    <div class="sv-card-header" style="background: linear-gradient(135deg, #1e90ff, #74b9ff)">
+                        <span class="sv-card-badge">🔬 Laboratorio</span>
+                        <h3>Elly Tanaka: Regeneración del Ajolote</h3>
+                        <p>Instituto Max Planck, Alemania</p>
+                    </div>
+                    <div class="sv-card-body">
+                        <p>La científica Elly Tanaka muestra cómo estudian la regeneración de extremidades en ajolotes en su laboratorio.</p>
+                        <button class="sv-explore-btn" onclick="openStreetView(this, 'tanaka')">🎬 ¡Ver Ajolotes!</button>
+                    </div>
+                    <div class="sv-iframe-container" id="sv-tanaka">
+                        <iframe loading="lazy" allowfullscreen
+                            src="https://www.youtube.com/embed/x0bYOUmwCGk"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                        </iframe>
+                        <button class="sv-close-btn" onclick="closeStreetView('tanaka')">✕ Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CURIOSIDADES -->
+    <section class="fun-facts-section" id="curiosidades">
+        <div class="container">
+            <h2 class="section-title">Curiosidades Alucinantes 🤩</h2>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <div class="fact-number">1</div>
+                    <h3>Nombre Azteca</h3>
+                    <p>Su nombre viene del náhuatl <strong>"atl"</strong> (agua) y <strong>"xolotl"</strong> 
+                    (monstruo). ¡Literalmente significa <em>"monstruo de agua"</em>! El dios Xólotl se 
+                    transformó en ajolote para escapar de ser sacrificado. 🏛️</p>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-number">2</div>
+                    <h3>Superpoder Real</h3>
+                    <p>Pueden <strong>regenerar</strong> extremidades completas, parte de su corazón, 
+                    ojos, médula espinal e incluso partes del cerebro. Los científicos los estudian 
+                    para intentar aplicar su capacidad regenerativa en medicina humana. 🦸</p>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-number">3</div>
+                    <h3>Peter Pan del Agua</h3>
+                    <p>Los ajolotes exhiben <strong>neotenia</strong>: mantienen sus características 
+                    larvales toda la vida. ¡Nunca hacen la metamorfosis completa como otros anfibios! 
+                    Es como si decidieran ser niños para siempre. 🧒</p>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-number">4</div>
+                    <h3>Sonrisa Eterna</h3>
+                    <p>Su boca tiene una forma natural que parece una <strong>sonrisa permanente</strong>. 
+                    ¡Por eso son tan adorables y se han convertido en uno de los animales favoritos 
+                    de internet! 😊</p>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-number">5</div>
+                    <h3>En la Cultura Pop</h3>
+                    <p>Los ajolotes aparecen en <strong>Minecraft</strong> como mascotas acuáticas 
+                    que te ayudan a luchar contra mobs hostiles. También hay Pokémon inspirados en 
+                    ellos, como <strong>Wooper</strong> y <strong>Mudkip</strong>. 🎮</p>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-number">6</div>
+                    <h3>Billete de 50 pesos</h3>
+                    <p>En México, el ajolote aparece en el <strong>billete de 50 pesos</strong> 
+                    que se empezó a usar en 2022. ¡Es tan importante para México que lo pusieron 
+                    en su dinero! 💵</p>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-number">7</div>
+                    <h3>Aspiradora Acuática</h3>
+                    <p>Los ajolotes no mastican: <strong>aspiran</strong> su comida creando un vacío 
+                    con su boca. Abren la boca tan rápido que la presa es succionada hacia dentro 
+                    junto con el agua. ¡Ñam! 🌪️</p>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-number">8</div>
+                    <h3>Brillan en la Oscuridad</h3>
+                    <p>Los ajolotes <strong>GFP</strong> (Green Fluorescent Protein) han sido modificados 
+                    genéticamente y <strong>brillan de color verde</strong> bajo luz ultravioleta. 
+                    ¡Como si fueran alienígenas! 👽</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section class="quiz-section" id="quiz">
+        <div class="container">
+            <h2 class="section-title">¡El Gran Quiz del Ajolote! 🧠</h2>
+            <p class="section-desc">100+ preguntas con fotos, unir parejas, juegos rápidos y más. ¿Cuántos niveles puedes superar?</p>
+            <div class="quiz-container" id="quizContainer">
+                <!-- Filled by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ESTUDIO DE DIBUJO + MUSEO -->
+    <section class="draw-section" id="dibujo">
+        <div class="container">
+            <h2 class="section-title">Estudio de Dibujo 🎨</h2>
+            <p class="section-desc">¡Dibuja tu propio ajolote y guárdalo en el Museo Ajolotil!</p>
+            <div class="draw-studio">
+                <div class="draw-toolbar">
+                    <div class="draw-colors">
+                        <button class="draw-color active" data-color="#F8A4C8" style="background:#F8A4C8" title="Rosa" onclick="setDrawColor('#F8A4C8')"></button>
+                        <button class="draw-color" data-color="#8b5cf6" style="background:#8b5cf6" title="Morado" onclick="setDrawColor('#8b5cf6')"></button>
+                        <button class="draw-color" data-color="#3b82f6" style="background:#3b82f6" title="Azul" onclick="setDrawColor('#3b82f6')"></button>
+                        <button class="draw-color" data-color="#10b981" style="background:#10b981" title="Verde" onclick="setDrawColor('#10b981')"></button>
+                        <button class="draw-color" data-color="#f59e0b" style="background:#f59e0b" title="Amarillo" onclick="setDrawColor('#f59e0b')"></button>
+                        <button class="draw-color" data-color="#ef4444" style="background:#ef4444" title="Rojo" onclick="setDrawColor('#ef4444')"></button>
+                        <button class="draw-color" data-color="#1a1a2e" style="background:#1a1a2e" title="Negro" onclick="setDrawColor('#1a1a2e')"></button>
+                        <button class="draw-color" data-color="#ffffff" style="background:#ffffff; border:2px solid #ccc" title="Blanco" onclick="setDrawColor('#ffffff')"></button>
+                        <div class="draw-custom-picker">
+                            <input type="color" id="customColorPicker" value="#ff69b4" class="draw-color-input" title="Elige un color" onchange="pickCustomColor(this.value)">
+                            <button class="draw-add-color-btn" onclick="saveCustomColor()" title="Guardar color">💾</button>
+                        </div>
+                    </div>
+                    <div class="draw-saved-colors" id="savedColorsRow"></div>
+                    <div class="draw-modes">
+                        <button class="draw-mode-btn active" data-mode="normal" onclick="setDrawMode('normal')">🖌️ Normal</button>
+                        <button class="draw-mode-btn" data-mode="neon" onclick="setDrawMode('neon')">✨ Neón</button>
+                        <button class="draw-mode-btn" data-mode="pastel" onclick="setDrawMode('pastel')">🌸 Pastel</button>
+                        <button class="draw-mode-btn" data-mode="transparent" onclick="setDrawMode('transparent')">💧 Transparente</button>
+                    </div>
+                    <div class="draw-tools">
+                        <label class="draw-size-label">✏️ Grosor:
+                            <input type="range" id="brushSize" min="1" max="30" value="4" class="draw-size-slider" oninput="setBrushSize(this.value)">
+                        </label>
+                        <button class="draw-tool-btn" onclick="setEraser()">🧹 Borrador</button>
+                        <button class="draw-tool-btn" onclick="setFillTool()">🪣 Rellenar</button>
+                        <button class="draw-tool-btn" onclick="setBlurTool()">🌫️ Difuminar</button>
+                        <button class="draw-tool-btn" onclick="clearCanvas()">🗑️ Limpiar</button>
+                        <button class="draw-tool-btn draw-save-btn" onclick="saveToMuseum()">🏛️ Guardar en Museo</button>
+                    </div>
+                </div>
+                <canvas id="drawCanvas" width="700" height="450" class="draw-canvas"></canvas>
+            </div>
+            <div class="museum-section" id="museumSection">
+                <h3 class="museum-title">🏛️ Museo Ajolotil</h3>
+                <p class="museum-desc">Tu galería personal de obras maestras ajolotiles</p>
+                <div class="museum-grid" id="museumGrid">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN JUNIOR -->
+    <section class="junior-section" id="junior">
+        <div class="container">
+            <div class="junior-header">
+                <h2 class="junior-title">🌟 Zona Junior 🌟</h2>
+                <p class="junior-subtitle">¡Ajolotes kawaii para los más pequeños!</p>
+            </div>
+
+            <div class="junior-facts-grid">
+                <div class="junior-card">
+                    <div class="junior-card-emoji">😊</div>
+                    <h3>¡Siempre Sonríen!</h3>
+                    <p>Los ajolotes tienen la boca en forma de sonrisa. ¡Parece que siempre están contentos!</p>
+                </div>
+                <div class="junior-card">
+                    <div class="junior-card-emoji">🩷</div>
+                    <h3>Son Rosas</h3>
+                    <p>Los ajolotes más famosos son de color <strong>rosa</strong> con branquias como plumitas. ¡Son super monos!</p>
+                </div>
+                <div class="junior-card">
+                    <div class="junior-card-emoji">💧</div>
+                    <h3>Viven en el Agua</h3>
+                    <p>Los ajolotes viven <strong>siempre en el agua</strong>. ¡Nunca salen a la tierra! Son como pececitos con patitas.</p>
+                </div>
+                <div class="junior-card">
+                    <div class="junior-card-emoji">🦸</div>
+                    <h3>Superpoder</h3>
+                    <p>Si pierden una patita, ¡les <strong>crece otra nueva</strong>! Son los superhéroes del mundo animal.</p>
+                </div>
+                <div class="junior-card">
+                    <div class="junior-card-emoji">🌿</div>
+                    <h3>De México</h3>
+                    <p>Viven en unos lagos especiales de <strong>México</strong> 🇲🇽, un país muy bonito de América.</p>
+                </div>
+                <div class="junior-card">
+                    <div class="junior-card-emoji">🍽️</div>
+                    <h3>Comen Gusanitos</h3>
+                    <p>Les encantan los <strong>gusanitos y los bichitos</strong> pequeños del agua. ¡Ñam ñam!</p>
+                </div>
+                <div class="junior-card">
+                    <div class="junior-card-emoji">🌙</div>
+                    <h3>Les Gusta la Noche</h3>
+                    <p>Los ajolotes prefieren <strong>la noche</strong> para jugar y buscar comida. ¡Son nocturnos!</p>
+                </div>
+                <div class="junior-card">
+                    <div class="junior-card-emoji">🐣</div>
+                    <h3>Siempre Bebés</h3>
+                    <p>Los ajolotes <strong>nunca se hacen mayores del todo</strong>. ¡Se quedan como bebés para siempre!</p>
+                </div>
+            </div>
+
+            <div class="junior-types">
+                <h3 class="junior-types-title">🦎 Conoce a estos 3 Ajolotes 🦎</h3>
+                <p class="junior-types-desc">¡Cada uno es especial y diferente!</p>
+                <div class="junior-types-grid">
+
+                    <div class="junior-type-card junior-type-leucistico">
+                        <div class="junior-type-img-wrap">
+                            <img src="img/leucistico_1.jpg" alt="Ajolote Leucístico rosa" class="junior-type-img">
+                            <div class="junior-type-badge">🩷</div>
+                        </div>
+                        <div class="junior-type-info">
+                            <h4>Ajolote Leucístico</h4>
+                            <span class="junior-type-nick">«El Rosita»</span>
+                            <ul class="junior-type-facts">
+                                <li>🩷 Es de color <strong>rosa clarito</strong>, ¡como un chicle!</li>
+                                <li>👀 Tiene los ojos <strong>oscuros</strong> y muy brillantes</li>
+                                <li>🪸 Sus branquias parecen <strong>plumitas rosas</strong></li>
+                                <li>⭐ Es el ajolote <strong>más famoso</strong> del mundo</li>
+                                <li>😊 ¡Siempre parece que está <strong>sonriendo</strong>!</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="junior-type-card junior-type-cobalto">
+                        <div class="junior-type-img-wrap">
+                            <div class="junior-type-kawaii-placeholder junior-kawaii-cobalto">
+                                <div class="kawaii-axolotl-body">
+                                    <div class="kawaii-eyes">
+                                        <span class="kawaii-eye">●</span>
+                                        <span class="kawaii-eye">●</span>
+                                    </div>
+                                    <div class="kawaii-mouth">‿</div>
+                                    <div class="kawaii-gills">
+                                        <span class="kawaii-gill left">🪸</span>
+                                        <span class="kawaii-gill right">🪸</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="junior-type-badge">💙</div>
+                        </div>
+                        <div class="junior-type-info">
+                            <h4>Ajolote Cobalto</h4>
+                            <span class="junior-type-nick">«El Azulito»</span>
+                            <ul class="junior-type-facts">
+                                <li>💙 Es de un color <strong>azul grisáceo</strong> precioso</li>
+                                <li>🌊 Parece que lleva el <strong>color del mar</strong></li>
+                                <li>👀 Sus ojos son <strong>oscuros como la noche</strong></li>
+                                <li>💎 Es uno de los más <strong>difíciles de encontrar</strong></li>
+                                <li>🤫 Es más <strong>tímido</strong> que los demás ajolotes</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="junior-type-card junior-type-melanico">
+                        <div class="junior-type-img-wrap">
+                            <img src="img/melanico_1.jpg" alt="Ajolote Melánico negro" class="junior-type-img">
+                            <div class="junior-type-badge">🖤</div>
+                        </div>
+                        <div class="junior-type-info">
+                            <h4>Ajolote Melánico</h4>
+                            <span class="junior-type-nick">«El Oscurito»</span>
+                            <ul class="junior-type-facts">
+                                <li>🖤 Es de color <strong>negro o gris oscuro</strong></li>
+                                <li>🌙 Le encanta <strong>la noche</strong>, ¡es un ninja!</li>
+                                <li>🥷 Su color le ayuda a <strong>esconderse</strong> muy bien</li>
+                                <li>💪 Es uno de los ajolotes más <strong>fuertes</strong></li>
+                                <li>✨ Sus ojitos <strong>brillan</strong> en la oscuridad</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="junior-quiz-area">
+                <h3 class="junior-quiz-title">🎮 Mini Quiz Junior</h3>
+                <p class="junior-quiz-desc">¡Para los exploradores más pequeños!</p>
+                <div id="juniorQuizContainer">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-axolotl">🦎</div>
+            <p class="footer-text">Hecho con 💖 para <strong>Mateo</strong></p>
+            <p class="footer-sub">El explorador de ajolotes más genial del mundo 🌟</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
