@@ -822,6 +822,34 @@
         </div>
     </section>
 
+    <!-- COMENTARIOS -->
+    <section class="comments-section" id="comentarios">
+        <div class="container">
+            <h2 class="section-title">Muro de Comentarios 💬</h2>
+            <p class="section-desc">¡Deja tu mensaje sobre los ajolotes!</p>
+            <div class="comment-form">
+                <div class="comment-form-row">
+                    <input type="text" id="commentName" class="comment-input" placeholder="Tu nombre" maxlength="30">
+                    <select id="commentAvatar" class="comment-select">
+                        <option value="🦎">🦎 Ajolote</option>
+                        <option value="🩷">🩷 Corazón</option>
+                        <option value="⭐">⭐ Estrella</option>
+                        <option value="🐾">🐾 Patita</option>
+                        <option value="🌊">🌊 Agua</option>
+                        <option value="🔬">🔬 Ciencia</option>
+                        <option value="🎨">🎨 Arte</option>
+                        <option value="🌿">🌿 Planta</option>
+                    </select>
+                </div>
+                <textarea id="commentText" class="comment-textarea" placeholder="Escribe tu comentario aquí..." maxlength="300" rows="3"></textarea>
+                <button class="comment-submit-btn" onclick="addComment()">📝 Publicar Comentario</button>
+            </div>
+            <div class="comments-list" id="commentsList">
+                <!-- Filled by JS -->
+            </div>
+        </div>
+    </section>
+
     <!-- FOOTER -->
     <footer class="footer">
         <div class="container">

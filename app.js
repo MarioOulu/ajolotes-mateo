@@ -7,43 +7,36 @@
 const COUNTER_NAMESPACE = 'ajolotes-mateo-web';
 
 async function initCounters() {
-    // --- VISITAS ---
-    // Cada visita nueva incrementa el contador
-    const visitado = sessionStorage.getItem('ajolotes-visitado');
-    if (!visitado) {
-        sessionStorage.setItem('ajolotes-visitado', '1');
+    // --- VISITAS (1 por dispositivo) ---
+    const yaVisitado = localStorage.getItem('ajolotes-visitado');
+    if (!yaVisitado) {
+        localStorage.setItem('ajolotes-visitado', '1');
         try {
             const res = await fetch(`https://counterapi.dev/api/${COUNTER_NAMESPACE}/views/up`, { method: 'GET' });
             const data = await res.json();
             document.getElementById('viewCount').textContent = data.count || 0;
         } catch (e) {
-            // Fallback: mostrar desde localStorage
-            const local = parseInt(localStorage.getItem('ajolotes-views') || '0') + 1;
-            localStorage.setItem('ajolotes-views', local);
-            document.getElementById('viewCount').textContent = local;
+            document.getElementById('viewCount').textContent = '1';
         }
     } else {
-        // Ya visitó en esta sesión, solo leer
         try {
             const res = await fetch(`https://counterapi.dev/api/${COUNTER_NAMESPACE}/views`);
             const data = await res.json();
             document.getElementById('viewCount').textContent = data.count || 0;
         } catch (e) {
-            document.getElementById('viewCount').textContent = localStorage.getItem('ajolotes-views') || '0';
+            document.getElementById('viewCount').textContent = '-';
         }
     }
 
-    // --- LIKES ---
-    // Leer likes actuales
+    // --- LIKES (1 por dispositivo) ---
     try {
         const res = await fetch(`https://counterapi.dev/api/${COUNTER_NAMESPACE}/likes`);
         const data = await res.json();
         document.getElementById('likeCount').textContent = data.count || 0;
     } catch (e) {
-        document.getElementById('likeCount').textContent = localStorage.getItem('ajolotes-likes') || '0';
+        document.getElementById('likeCount').textContent = '0';
     }
 
-    // Restaurar estado del like del usuario
     if (localStorage.getItem('ajolotes-liked') === '1') {
         document.getElementById('likeBtn').classList.add('liked');
         document.getElementById('likeIcon').textContent = '❤️';
@@ -56,35 +49,93 @@ async function toggleLike() {
     const countEl = document.getElementById('likeCount');
     const hasLiked = localStorage.getItem('ajolotes-liked') === '1';
 
-    if (hasLiked) {
-        // Quitar like
-        localStorage.setItem('ajolotes-liked', '0');
-        btn.classList.remove('liked');
-        icon.textContent = '🤍';
-        try {
-            const res = await fetch(`https://counterapi.dev/api/${COUNTER_NAMESPACE}/likes/down`, { method: 'GET' });
-            const data = await res.json();
-            countEl.textContent = Math.max(0, data.count || 0);
-        } catch (e) {
-            const c = Math.max(0, parseInt(countEl.textContent || '0') - 1);
-            countEl.textContent = c;
-            localStorage.setItem('ajolotes-likes', c);
-        }
-    } else {
-        // Dar like
-        localStorage.setItem('ajolotes-liked', '1');
-        btn.classList.add('liked');
-        icon.textContent = '❤️';
-        try {
-            const res = await fetch(`https://counterapi.dev/api/${COUNTER_NAMESPACE}/likes/up`, { method: 'GET' });
-            const data = await res.json();
-            countEl.textContent = data.count || 0;
-        } catch (e) {
-            const c = parseInt(countEl.textContent || '0') + 1;
-            countEl.textContent = c;
-            localStorage.setItem('ajolotes-likes', c);
-        }
+    // Solo 1 like por dispositivo — si ya dio like, no hace nada
+    if (hasLiked) return;
+
+    localStorage.setItem('ajolotes-liked', '1');
+    btn.classList.add('liked');
+    icon.textContent = '❤️';
+    try {
+        const res = await fetch(`https://counterapi.dev/api/${COUNTER_NAMESPACE}/likes/up`, { method: 'GET' });
+        const data = await res.json();
+        countEl.textContent = data.count || 0;
+    } catch (e) {
+        const c = parseInt(countEl.textContent || '0') + 1;
+        countEl.textContent = c;
     }
+}
+
+// ─── COMENTARIOS ────────────────────────────
+
+function getComments() {
+    return JSON.parse(localStorage.getItem('ajolotes-comments') || '[]');
+}
+
+function saveComments(comments) {
+    localStorage.setItem('ajolotes-comments', JSON.stringify(comments));
+}
+
+function addComment() {
+    const nameEl = document.getElementById('commentName');
+    const textEl = document.getElementById('commentText');
+    const avatarEl = document.getElementById('commentAvatar');
+
+    const name = nameEl.value.trim();
+    const text = textEl.value.trim();
+    const avatar = avatarEl.value;
+
+    if (!name) { nameEl.focus(); return; }
+    if (!text) { textEl.focus(); return; }
+
+    const comment = {
+        id: Date.now(),
+        name,
+        text,
+        avatar,
+        date: new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })
+    };
+
+    const comments = getComments();
+    comments.unshift(comment);
+    saveComments(comments);
+
+    nameEl.value = '';
+    textEl.value = '';
+    renderComments();
+}
+
+function deleteComment(id) {
+    const comments = getComments().filter(c => c.id !== id);
+    saveComments(comments);
+    renderComments();
+}
+
+function renderComments() {
+    const list = document.getElementById('commentsList');
+    const comments = getComments();
+
+    if (comments.length === 0) {
+        list.innerHTML = `
+            <div class="comments-empty">
+                <div class="comments-empty-icon">💬</div>
+                <p>¡Sé el primero en dejar un comentario!</p>
+            </div>`;
+        return;
+    }
+
+    list.innerHTML = comments.map(c => `
+        <div class="comment-card">
+            <div class="comment-header">
+                <div class="comment-avatar">${c.avatar}</div>
+                <div>
+                    <div class="comment-author">${c.name}</div>
+                    <div class="comment-date">${c.date}</div>
+                </div>
+            </div>
+            <div class="comment-body">${c.text}</div>
+            <button class="comment-delete" onclick="deleteComment(${c.id})" title="Borrar">✕</button>
+        </div>
+    `).join('');
 }
 
 // ─── AXOLOTL DATA ───────────────────────────
@@ -1755,4 +1806,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Init likes & views counters
     initCounters();
+
+    // Init comments
+    renderComments();
 });
