@@ -2,6 +2,91 @@
    AJOLOTES DE MATEO — JavaScript
    ═══════════════════════════════════════════ */
 
+// ─── LIKES & VISITAS ────────────────────────
+
+const COUNTER_NAMESPACE = 'ajolotes-mateo-web';
+
+async function initCounters() {
+    // --- VISITAS ---
+    // Cada visita nueva incrementa el contador
+    const visitado = sessionStorage.getItem('ajolotes-visitado');
+    if (!visitado) {
+        sessionStorage.setItem('ajolotes-visitado', '1');
+        try {
+            const res = await fetch(`https://counterapi.dev/api/${COUNTER_NAMESPACE}/views/up`, { method: 'GET' });
+            const data = await res.json();
+            document.getElementById('viewCount').textContent = data.count || 0;
+        } catch (e) {
+            // Fallback: mostrar desde localStorage
+            const local = parseInt(localStorage.getItem('ajolotes-views') || '0') + 1;
+            localStorage.setItem('ajolotes-views', local);
+            document.getElementById('viewCount').textContent = local;
+        }
+    } else {
+        // Ya visitó en esta sesión, solo leer
+        try {
+            const res = await fetch(`https://counterapi.dev/api/${COUNTER_NAMESPACE}/views`);
+            const data = await res.json();
+            document.getElementById('viewCount').textContent = data.count || 0;
+        } catch (e) {
+            document.getElementById('viewCount').textContent = localStorage.getItem('ajolotes-views') || '0';
+        }
+    }
+
+    // --- LIKES ---
+    // Leer likes actuales
+    try {
+        const res = await fetch(`https://counterapi.dev/api/${COUNTER_NAMESPACE}/likes`);
+        const data = await res.json();
+        document.getElementById('likeCount').textContent = data.count || 0;
+    } catch (e) {
+        document.getElementById('likeCount').textContent = localStorage.getItem('ajolotes-likes') || '0';
+    }
+
+    // Restaurar estado del like del usuario
+    if (localStorage.getItem('ajolotes-liked') === '1') {
+        document.getElementById('likeBtn').classList.add('liked');
+        document.getElementById('likeIcon').textContent = '❤️';
+    }
+}
+
+async function toggleLike() {
+    const btn = document.getElementById('likeBtn');
+    const icon = document.getElementById('likeIcon');
+    const countEl = document.getElementById('likeCount');
+    const hasLiked = localStorage.getItem('ajolotes-liked') === '1';
+
+    if (hasLiked) {
+        // Quitar like
+        localStorage.setItem('ajolotes-liked', '0');
+        btn.classList.remove('liked');
+        icon.textContent = '🤍';
+        try {
+            const res = await fetch(`https://counterapi.dev/api/${COUNTER_NAMESPACE}/likes/down`, { method: 'GET' });
+            const data = await res.json();
+            countEl.textContent = Math.max(0, data.count || 0);
+        } catch (e) {
+            const c = Math.max(0, parseInt(countEl.textContent || '0') - 1);
+            countEl.textContent = c;
+            localStorage.setItem('ajolotes-likes', c);
+        }
+    } else {
+        // Dar like
+        localStorage.setItem('ajolotes-liked', '1');
+        btn.classList.add('liked');
+        icon.textContent = '❤️';
+        try {
+            const res = await fetch(`https://counterapi.dev/api/${COUNTER_NAMESPACE}/likes/up`, { method: 'GET' });
+            const data = await res.json();
+            countEl.textContent = data.count || 0;
+        } catch (e) {
+            const c = parseInt(countEl.textContent || '0') + 1;
+            countEl.textContent = c;
+            localStorage.setItem('ajolotes-likes', c);
+        }
+    }
+}
+
 // ─── AXOLOTL DATA ───────────────────────────
 
 const axolotlTypes = {
@@ -1667,4 +1752,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Init street view filter (show habitat by default)
     filterStreetView('habitat');
+
+    // Init likes & views counters
+    initCounters();
 });

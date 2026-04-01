@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mariooulu.github.io/ajolotes-mateo/sitemap.xml

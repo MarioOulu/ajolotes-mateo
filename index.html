@@ -3,13 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🦎 El Mundo de los Ajolotes de Mateo</title>
+    <title>Ajolotes de Mateo 🦎 — Todo sobre los ajolotes mexicanos</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Ajolotes de Mateo: Descubre los 33 tipos de ajolotes mexicanos, datos increíbles, mapa interactivo, vídeos en vivo, quiz y mucho más. ¡La web más completa sobre ajolotes hecha por Mateo!">
+    <meta name="keywords" content="ajolotes, ajolotes de mateo, ajolote mexicano, axolotl, tipos de ajolotes, ajolote leucístico, ajolote silvestre, Xochimilco, regeneración, anfibios, animales México, ajolote rosa">
+    <meta name="author" content="Mateo">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mariooulu.github.io/ajolotes-mateo/">
+
+    <!-- Open Graph (Facebook, WhatsApp, etc.) -->
+    <meta property="og:title" content="Ajolotes de Mateo 🦎 — Todo sobre los ajolotes mexicanos">
+    <meta property="og:description" content="Descubre los 33 tipos de ajolotes, datos increíbles, mapa interactivo, vídeos en vivo y quiz. ¡La web más completa sobre ajolotes!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mariooulu.github.io/ajolotes-mateo/">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:site_name" content="Ajolotes de Mateo">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ajolotes de Mateo 🦎 — Todo sobre los ajolotes mexicanos">
+    <meta name="twitter:description" content="Descubre los 33 tipos de ajolotes, datos increíbles, mapa interactivo, vídeos en vivo y quiz. ¡La web más completa sobre ajolotes!">
+
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Ajolotes de Mateo",
+        "url": "https://mariooulu.github.io/ajolotes-mateo/",
+        "description": "La web más completa sobre ajolotes mexicanos: 33 tipos, datos, mapa interactivo, vídeos en vivo, quiz y zona de dibujo.",
+        "inLanguage": "es",
+        "keywords": "ajolotes, ajolotes de mateo, axolotl, ajolote mexicano, tipos de ajolotes",
+        "author": {
+            "@type": "Person",
+            "name": "Mateo"
+        }
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- CONTADORES LIKES / VISITAS -->
+    <div class="hero-counters">
+        <button class="hero-counter hero-likes" id="likeBtn" onclick="toggleLike()">
+            <span class="counter-icon" id="likeIcon">🤍</span>
+            <span class="counter-num" id="likeCount">...</span>
+            <span class="counter-label">Likes</span>
+        </button>
+        <div class="hero-counter hero-views">
+            <span class="counter-icon">👀</span>
+            <span class="counter-num" id="viewCount">...</span>
+            <span class="counter-label">Visitas</span>
+        </div>
+    </div>
+
     <!-- HERO SECTION -->
     <header class="hero">
         <div class="bubbles">

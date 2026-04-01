@@ -27,6 +27,95 @@
     --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
 }
 
+/* ─── CONTADORES LIKES / VISITAS ─── */
+.hero-counters {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1001;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    pointer-events: none;
+}
+
+.hero-counter {
+    pointer-events: all;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(248, 164, 200, 0.3);
+    border-radius: 50px;
+    padding: 8px 16px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.hero-likes {
+    cursor: pointer;
+    outline: none;
+}
+
+.hero-likes:hover {
+    transform: scale(1.08);
+    border-color: #ff6b81;
+    box-shadow: 0 4px 20px rgba(255, 107, 129, 0.3);
+}
+
+.hero-likes.liked {
+    border-color: #ff4757;
+    background: rgba(255, 71, 87, 0.1);
+}
+
+.hero-likes.liked .counter-icon {
+    animation: likePopCounter 0.4s ease;
+}
+
+@keyframes likePopCounter {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+    100% { transform: scale(1); }
+}
+
+.counter-icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s;
+}
+
+.counter-num {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--purple);
+    min-width: 20px;
+    text-align: center;
+}
+
+.counter-label {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .hero-counters {
+        padding: 8px 12px;
+    }
+    .hero-counter {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+        gap: 4px;
+    }
+    .counter-icon { font-size: 1rem; }
+    .counter-num { font-size: 0.85rem; }
+    .counter-label { display: none; }
+}
+
 html {
     scroll-behavior: smooth;
 }
